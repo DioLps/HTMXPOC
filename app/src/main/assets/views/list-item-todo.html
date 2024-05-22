@@ -1,0 +1,27 @@
+<md-list-item id="{{id}}">
+    <div class="todos__todo">
+        <label class="todos__label">
+            <md-checkbox
+                    ws-send
+                    hx-trigger="click"
+                    touch-target="wrapper"
+                    id="toggle-todo-request"
+                    name="{{id}}"
+                    {{completed}}
+            ></md-checkbox>
+            {{title}}
+        </label>
+        <div class="todos__actions">
+            <md-filled-tonal-icon-button
+                    ws-send
+                    hx-trigger="click"
+                    touch-target="wrapper"
+                    id="delete-todo-request"
+                    name="{{id}}"
+            >
+                <md-icon>delete</md-icon>
+            </md-filled-tonal-icon-button>
+        </div>
+    </div>
+</md-list-item>
+<md-divider></md-divider>

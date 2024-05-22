@@ -1,0 +1,32 @@
+<md-dialog class="create-todo">
+    <div slot="headline">
+        <md-icon-button
+                form="create-form"
+                value="close"
+                aria-label="Close dialog"
+                role="presentation"
+        >
+            <md-icon aria-hidden="true">close</md-icon>
+        </md-icon-button>
+        New chore
+    </div>
+    <form
+            id="create-form"
+            slot="content"
+            method="dialog"
+            class="create-todo-content"
+    >
+        <md-filled-text-field
+                autofocus=""
+                label="Chore Name"
+                role="presentation"
+                inputmode=""
+                type="text"
+                name="title"
+                ws-send
+                hx-trigger="keyup[keyCode==13]"
+                id="create-todo-request"
+                hx-on="htmx:wsAfterSend: onSubmitTodo()"
+        ></md-filled-text-field>
+    </form>
+</md-dialog>

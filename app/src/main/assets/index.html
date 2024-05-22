@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chores - Organize your tasks with HTMX</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link rel="stylesheet" href="./custom-style.css" />
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import "@material/web/all.js";
+        import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+        (() => {
+          document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+
+          const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+          if (systemDark) {
+            document.body.classList.add("dark");
+          }
+        })();
+    </script>
+    <script src="./index.js" defer></script>
+    <script src="https://unpkg.com/htmx.org@1.9.11" defer></script>
+    <script
+            src="https://unpkg.com/htmx.org@1.9.11/dist/ext/ws.js"
+            defer
+    ></script>
+</head>
+<body hx-ext="ws" ws-connect="ws://localhost:9000/">
+<main>
+    <h3 class="md-typescale-headline-medium">Chores</h3>
+
+    <md-list class="todos">
+        <div class="todos__container" id="todos-list"></div>
+        <div ws-send hx-trigger="revealed" id="load-todos"></div>
+    </md-list>
+
+    <md-fab class="action-fab" label="New" onclick="onCreate()">
+        <md-icon slot="icon">add</md-icon>
+    </md-fab>
+</main>
+
+<div id="create-todo-dialog-shell" ws-send hx-trigger="revealed"></div>
+</body>
+</html>
